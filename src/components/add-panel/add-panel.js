@@ -6,9 +6,12 @@ import './add-panel.css';
 const AddPanel = () => {
   return (
     <div className="add-panel">
-      <form noValidate autoComplete="off">
+      <form
+        noValidate
+        autoComplete="off"
+        onSubmit={(e) => console.log(e)}>
         <TextField
-          className="inputs"
+          className="add-panel-inputs"
           fullWidth
           label="Task"
           id="outlined-size-small"
@@ -17,6 +20,7 @@ const AddPanel = () => {
           size="small"
         />
         <Button
+          type="submit"
           variant="outlined"
           size="small"
           color="primary"
