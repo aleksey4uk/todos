@@ -1,11 +1,18 @@
 .list-items {
+  width: 100% !important;
   padding: 5px !important;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
 }
 
-.list-item-text {
+.list-items form {
   width: 80%;
-  border-bottom: none;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.list-item-text {
+  width: 1000% !important;
 }

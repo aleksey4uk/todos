@@ -18,7 +18,14 @@ const ListItems = ({id, name, onRead, onDelete, onChecked}) => {
         inputProps={{ 'aria-label': 'secondary checkbox' }}
         onClick={()=>console.log(id)}
       />
-      <TextField id="standard-basic" className='list-item-text' onChange={(e)=>onRead(e, id)} placeholder={name}/>
+      <form onSubmit={()=>console.log('Отпрв')}>
+        <TextField
+          id="standard-basic"
+          autoComplete="off"
+          className='list-item-text'
+          onChange={(e)=>onRead(e, id)}
+          placeholder={name}/>
+      </form>
       <IconButton aria-label="delete" onClick={() => onDelete(id)}>
         <DeleteIcon />
       </IconButton>
