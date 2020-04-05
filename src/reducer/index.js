@@ -47,10 +47,18 @@ const reducer = (state = initianalState, action) => {
       }
 
     case 'CHECKED':
-      console.log("ОТМЕТИЛИ ", action.paylaod);
       const idxCheck = state.data.findIndex(item=> item.id === action.payload);
+      let newelem = {
+        ...state.data[idxCheck],
+        checked: !state.data[idxCheck].checked
+      };
       return {
         ...state,
+        data: [
+          ...state.data.slice(0, idxCheck),
+          newelem,
+          ...state.data.slice(idxCheck+1)
+        ]
       }
 
     default: return state;

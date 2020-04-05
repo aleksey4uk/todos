@@ -10,15 +10,19 @@ import './list-item.css';
 
 
 
-const ListItems = ({id, name, onRead, onDelete, onChecked}) => {
+const ListItems = ({id, name, onRead, onDelete, onChecked, checked}) => {
   return (
     <ListItem className='list-items'>
       <Checkbox
+        checked={checked}
         color="primary"
         inputProps={{ 'aria-label': 'secondary checkbox' }}
-        onClick={()=>console.log(id)}
+        onClick={()=>onChecked(id, checked)}
       />
-      <form onSubmit={()=>console.log('Отпрв')}>
+      <form onSubmit={(e) => {
+        e.preventDefault();
+        console.log('Ввод данных завершен');
+      }}>
         <TextField
           id="standard-basic"
           autoComplete="off"

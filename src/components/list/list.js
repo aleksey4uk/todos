@@ -11,7 +11,6 @@ class Lists extends Component {
 
 
   componentDidMount() {
-    console.log('rendering')
     swapiService
       .getData()
       .then(this.props.load)
@@ -32,7 +31,7 @@ class Lists extends Component {
                   {...item}
                   key={item.id}
                   onDelete={this.props.onDelete}
-                  onChecked={onChecked}
+                  onChecked={this.props.onChecked}
                   onRead={onRead}/>
               )
             })
@@ -43,9 +42,9 @@ class Lists extends Component {
   }
 }
 
-const onChecked = (id) => {
+/*const onChecked = (id) => {
   console.log('Помечаем элемент с id: ', id, ' завершенным');
-};
+};*/
 
 const onRead = (e, id) => {
   e.preventDefault();
@@ -62,7 +61,14 @@ const mapDispatchToProps = (dispatch) => {
         .then(res => console.log(res))
         .then(() => dispatch({type: 'DELETE', payload}))
     },
-    onChecked: (payload) => dispatch({type: "CHECKED", payload})
+    onChecked: (payload, checked) => {
+      console.log("Мы передали текущий чек: ", checked)
+      let chek = !checked;
+      swapiService
+        .checkedItem(payload, chek)
+        .then(res => console.log(res))
+        .then(() => dispatch({type: 'CHECKED', payload}))
+    }
   }
 }
 

@@ -10,6 +10,11 @@ export default class SwapiService {
 
   deleteItem = async (id) => {
     let res = await axios.delete(`http://localhost:3000/users/${id}`)
-    return await res.data; 
+    return await res.data;
+  }
+
+  checkedItem = async (id, checked) => {
+    let res = await axios.patch(`http://localhost:3000/users/${id}`, {checked});
+    return await res.data;
   }
 }
