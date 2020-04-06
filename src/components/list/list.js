@@ -9,7 +9,6 @@ const swapiService = new SwapiService();
 
 class Lists extends Component {
 
-
   componentDidMount() {
     swapiService
       .getData()
@@ -18,18 +17,17 @@ class Lists extends Component {
   }
 
   render() {
-    console.log(this.props)
-    if(this.props.data.length <=0) return <h3>Загрузка...</h3>
+    if(this.props.data.length <=0 ) return <h3>Загрузка...</h3>
     const data = this.props.data;
     return (
       <Fragment>
         <List>
           {
-            data.map(item => {
+            data.map((item, index) => {
               return (
                 <ListItems
                   {...item}
-                  key={item.id}
+                  key={index}
                   onDelete={this.props.onDelete}
                   onChecked={this.props.onChecked}
                   onRead={onRead}/>

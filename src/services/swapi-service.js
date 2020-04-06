@@ -17,4 +17,8 @@ export default class SwapiService {
     let res = await axios.patch(`http://localhost:3000/users/${id}`, {checked});
     return await res.data;
   }
+
+  addItem = async (payload) => {
+    return await axios.post(`http://localhost:3000/users/`, payload);
+  }
 }

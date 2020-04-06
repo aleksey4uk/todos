@@ -1,5 +1,6 @@
 const initianalState = {
-  data: []
+  data: [],
+  value: ''
 }
 
 const reducer = (state = initianalState, action) => {
@@ -11,7 +12,6 @@ const reducer = (state = initianalState, action) => {
         loading: true};
 
     case 'COMPLETE':
-      console.log(state)
       return {
         ...state,
         loading: false,
@@ -43,7 +43,6 @@ const reducer = (state = initianalState, action) => {
       const idxRead = state.data.findIndex(item=> item.name === action.payload);
       return {
         ...state,
-
       }
 
     case 'CHECKED':
@@ -58,6 +57,23 @@ const reducer = (state = initianalState, action) => {
           ...state.data.slice(0, idxCheck),
           newelem,
           ...state.data.slice(idxCheck+1)
+        ]
+      }
+
+    case 'ADD-VALUE':
+      console.log(action.payload.target.value)
+      return {
+        ...state,
+        value: action.payload.target.value
+      };
+
+    case 'COMPLETE-VALUE':
+    console.log(action.payload)
+      return {
+        ...state,
+        data: [
+          ...state.data,
+          action.payload,
         ]
       }
 

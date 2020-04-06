@@ -21,7 +21,6 @@ const ListItems = ({id, name, onRead, onDelete, onChecked, checked}) => {
       />
       <form onSubmit={(e) => {
         e.preventDefault();
-        console.log('Ввод данных завершен');
       }}>
         <TextField
           id="standard-basic"
