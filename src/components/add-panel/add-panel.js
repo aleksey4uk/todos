@@ -50,17 +50,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onChanges: (payload) => {
-      dispatch({type: 'ADD-VALUE', payload})
-    },
-
+    onChanges: (payload) => dispatch({type: 'ADD-VALUE', payload}),
     onSubmits: (e, value) => {
       e.preventDefault();
-
-      const payload = {
-        name: value,
-        checked: false,
-      }
+      const payload = {name: value,checked: false};
       swapiService
         .addItem(payload)
         .then(res => {
@@ -68,9 +61,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch({type: 'COMPLETE-VALUE', payload});
         })
     }
-
-
-  }
+  };
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(AddPanel);

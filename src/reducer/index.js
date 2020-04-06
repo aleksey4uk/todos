@@ -28,7 +28,7 @@ const reducer = (state = initianalState, action) => {
         ]
       }
 
-    case 'ADD':
+/*    case 'ADD':
       console.log("добавляем");
       return {
         ...state,
@@ -37,10 +37,10 @@ const reducer = (state = initianalState, action) => {
           action.payload
         ]
       }
-
+*/
     case 'EDIT':
       console.log("Редактируем");
-      const idxRead = state.data.findIndex(item=> item.name === action.payload);
+      /*const idxRead = state.data.findIndex(item=> item.name === action.payload);*/
       return {
         ...state,
       }
@@ -61,7 +61,6 @@ const reducer = (state = initianalState, action) => {
       }
 
     case 'ADD-VALUE':
-      console.log(action.payload.target.value)
       return {
         ...state,
         value: action.payload.target.value
@@ -74,8 +73,9 @@ const reducer = (state = initianalState, action) => {
         data: [
           ...state.data,
           action.payload,
-        ]
-      }
+        ],
+        value: ''
+      };
 
     default: return state;
   }

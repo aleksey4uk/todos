@@ -1,7 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
 import List from '@material-ui/core/List';
-import Card from '@material-ui/core/Card';
 import ListItems from '../list-item';
 import SwapiService from '../../services/swapi-service';
 
