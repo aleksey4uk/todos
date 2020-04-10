@@ -1,6 +1,6 @@
 const initianalState = {
   data: [],
-  value: ''
+  value: '',
 }
 
 const reducer = (state = initianalState, action) => {
@@ -18,8 +18,7 @@ const reducer = (state = initianalState, action) => {
       }
 
     case 'DELETE':
-      console.log("удаляем элемент: ", action.payload);
-      const idx = state.data.findIndex((item)=>item.id ===action.payload)
+      const idx = state.data.findIndex((item)=>item.id ===action.payload);
       return {
         ...state,
         data: [
@@ -39,10 +38,22 @@ const reducer = (state = initianalState, action) => {
       }
 */
     case 'EDIT':
-      console.log("Редактируем");
-      /*const idxRead = state.data.findIndex(item=> item.name === action.payload);*/
       return {
         ...state,
+        editValue: {
+          value: action.payload.value.target.value,
+          id: action.payload.value.target.id,
+        }
+      }
+
+    case 'EDIT-START':
+      const idxStart = state.data.findIndex(item=> item.id === action.payload);
+      return {
+        ...state,
+        editValue: {
+          id: action.payload,
+          classes: 'on'
+        }
       }
 
     case 'CHECKED':
@@ -67,7 +78,6 @@ const reducer = (state = initianalState, action) => {
       };
 
     case 'COMPLETE-VALUE':
-    console.log(action.payload)
       return {
         ...state,
         data: [

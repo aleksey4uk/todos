@@ -53,6 +53,7 @@ const mapDispatchToProps = (dispatch) => {
     onChanges: (payload) => dispatch({type: 'ADD-VALUE', payload}),
     onSubmits: (e, value) => {
       e.preventDefault();
+      if(value.length <=0) return;
       const payload = {name: value,checked: false};
       swapiService
         .addItem(payload)

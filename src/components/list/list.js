@@ -26,7 +26,10 @@ class Lists extends Component {
               return (
                 <ListItems
                   {...item}
+                  editValue={this.props.editValue}
                   key={index}
+                  onEdit={this.props.onEdit}
+                  onEditStart={this.props.onEditStart}
                   onDelete={this.props.onDelete}
                   onChecked={this.props.onChecked}
                   onRead={onRead}/>
@@ -65,7 +68,15 @@ const mapDispatchToProps = (dispatch) => {
         .checkedItem(payload, chek)
         .then(res => console.log(res))
         .then(() => dispatch({type: 'CHECKED', payload}))
-    }
+    },
+    onEdit: (e, id) => {
+      let payload = {
+        value: e,
+        id: id
+      }
+      dispatch({type: 'EDIT', payload})
+    },
+    onEditStart: (payload) => dispatch({type: 'EDIT-START', payload})
   }
 }
 

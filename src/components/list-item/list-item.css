@@ -14,5 +14,14 @@
 }
 
 .list-item-text {
-  width: 1000% !important;
+  display: none !important;
+  width: 100% !important;
+}
+
+.on {
+  display: inherit !important;
+}
+
+.off {
+  display: none !important;
 }

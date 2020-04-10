@@ -4,11 +4,20 @@ import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ListItemText from '@material-ui/core/ListItemText';
 import './list-item.css';
 
 
 
-const ListItems = ({id, name, onRead, onDelete, onChecked, checked}) => {
+const ListItems = ({id, name, onEdit, onDelete, onChecked, checked, editValue = false, onEditStart}) => {
+  let classes = 'list-item-text ';
+  let classes2 = 'list-item-texts ';
+  if(editValue) {
+    if(editValue.id == id) {
+      classes += "on";
+      classes2 += "off"
+    }
+  }
   return (
     <ListItem className='list-items'>
       <Checkbox
@@ -19,11 +28,16 @@ const ListItems = ({id, name, onRead, onDelete, onChecked, checked}) => {
       />
       <form onSubmit={(e) => e.preventDefault()}>
         <TextField
-          id="standard-basic"
+          id={`${id}`}
           autoComplete="off"
-          className='list-item-text'
-          onChange={(e)=>onRead(e, id)}
+          className={classes}
+          onChange={(e, id)=>onEdit(e, id)}
           placeholder={name}/>
+        <ListItemText
+          className={classes2}
+          id={id}
+          primary={name}
+          onClick={()=>{onEditStart(id)}}/>
       </form>
       <IconButton aria-label="delete" onClick={() => onDelete(id)}>
         <DeleteIcon />
