@@ -1,18 +1,16 @@
 import React from 'react';
-import AddPanel from '../add-panel';
 import Card from '@material-ui/core/Card';
+import AddPanel from '../add-panel';
 import Lists from '../list';
 import './app.css';
 
-const App = () => {
-  return (
-    <div className="app">
-      <Card className="card">
-        <AddPanel />
-        <Lists />
-      </Card>
-    </div>
-  )
-}
+const App = () => (
+  <div className="app">
+    <Card className="card">
+      <AddPanel />
+      <Lists />
+    </Card>
+  </div>
+);
 
 export default App;
