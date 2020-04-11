@@ -9,14 +9,18 @@ import './list-item.css';
 
 
 
-const ListItems = ({id, name, onEdit, onDelete, onChecked, checked, editValue = false, onEditStart}) => {
+const ListItems = ({id, name, onEdit, onDelete, onChecked, checked, editValue = false, onEditStart, editComplete}) => {
   let classes = 'list-item-text ';
   let classes2 = 'list-item-texts ';
   if(editValue) {
-    if(editValue.id == id) {
+    if(editValue.id === id) {
       classes += "on";
       classes2 += "off"
     }
+  }
+  if(editValue.classes === 'off') {
+    classes = 'list-item-text '
+    classes2 = 'list-item-texts '
   }
   return (
     <ListItem className='list-items'>
@@ -26,13 +30,14 @@ const ListItems = ({id, name, onEdit, onDelete, onChecked, checked, editValue = 
         inputProps={{ 'aria-label': 'secondary checkbox' }}
         onClick={()=>onChecked(id, checked)}
       />
-      <form onSubmit={(e) => e.preventDefault()}>
+      <form onSubmit={(event)=>editComplete(event, id, editValue.value)}>
         <TextField
           id={`${id}`}
           autoComplete="off"
           className={classes}
-          onChange={(e, id)=>onEdit(e, id)}
-          placeholder={name}/>
+          onChange={(event)=> { event.preventDefault(); onEdit(event, id)}}
+          placeholder={name}
+          value={editValue.value}/>
         <ListItemText
           className={classes2}
           id={id}

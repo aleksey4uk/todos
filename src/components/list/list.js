@@ -32,7 +32,7 @@ class Lists extends Component {
                   onEditStart={this.props.onEditStart}
                   onDelete={this.props.onDelete}
                   onChecked={this.props.onChecked}
-                  onRead={onRead}/>
+                  editComplete={this.props.editComplete}/>
               )
             })
           }
@@ -41,15 +41,6 @@ class Lists extends Component {
     )
   }
 }
-
-/*const onChecked = (id) => {
-  console.log('Помечаем элемент с id: ', id, ' завершенным');
-};*/
-
-const onRead = (e, id) => {
-  e.preventDefault();
-  console.log('Получаем данные ввода: ', e.target.value, `c id `, id);
-};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -62,7 +53,6 @@ const mapDispatchToProps = (dispatch) => {
         .then(() => dispatch({type: 'DELETE', payload}))
     },
     onChecked: (payload, checked) => {
-      console.log("Мы передали текущий чек: ", checked)
       let chek = !checked;
       swapiService
         .checkedItem(payload, chek)
@@ -71,12 +61,18 @@ const mapDispatchToProps = (dispatch) => {
     },
     onEdit: (e, id) => {
       let payload = {
-        value: e,
+        value: e.target.value,
         id: id
       }
       dispatch({type: 'EDIT', payload})
     },
-    onEditStart: (payload) => dispatch({type: 'EDIT-START', payload})
+    onEditStart: (payload) => dispatch({type: 'EDIT-START', payload}),
+    editComplete: (event, id, value) => {
+      event.preventDefault();
+      swapiService
+        .editItem(id, value)
+        .then((payload) => dispatch({type: 'EDIT-COMPLETE', payload}))
+   },
   }
 }
 

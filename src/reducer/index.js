@@ -1,6 +1,9 @@
 const initianalState = {
   data: [],
   value: '',
+  editValue: {
+    value: '',
+  }
 }
 
 const reducer = (state = initianalState, action) => {
@@ -27,32 +30,39 @@ const reducer = (state = initianalState, action) => {
         ]
       }
 
-/*    case 'ADD':
-      console.log("добавляем");
-      return {
-        ...state,
-        data: [
-          ...state.data,
-          action.payload
-        ]
-      }
-*/
     case 'EDIT':
+      let value = action.payload.value;
       return {
         ...state,
         editValue: {
-          value: action.payload.value.target.value,
-          id: action.payload.value.target.id,
+          value,
+          id: action.payload.id,
+          classes: 'on'
         }
       }
 
     case 'EDIT-START':
-      const idxStart = state.data.findIndex(item=> item.id === action.payload);
       return {
         ...state,
         editValue: {
+          value: state.data.find(item=>item.id===action.payload).name,
           id: action.payload,
           classes: 'on'
+        }
+      };
+
+    case 'EDIT-COMPLETE':
+      const idxvalues = state.data.findIndex(item=> item.id === state.editValue.id);
+      return {
+        ...state,
+        data: [
+          ...state.data.slice(0, idxvalues),
+          action.payload,
+          ...state.data.slice(idxvalues+1)
+        ],
+        editValue: {
+          ...state.editValue,
+          classes: 'off',
         }
       }
 

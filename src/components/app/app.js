@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import Lists from '../list';
 import './app.css';
 
-const App = (props) => {
+const App = () => {
   return (
     <div className="app">
       <Card className="card">
