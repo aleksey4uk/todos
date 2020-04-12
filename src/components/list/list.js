@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
 import ListItems from '../list-item';
 import SwapiService from '../../services/swapi-service';
@@ -28,6 +29,7 @@ class Lists extends Component {
               } = this.props;
               return (
                 <ListItems
+                  checked={item.checked}
                   id={item.id}
                   name={item.name}
                   editValue={editValue}
@@ -46,6 +48,18 @@ class Lists extends Component {
     );
   }
 }
+
+Lists.propTypes = {
+  onEdit: PropTypes.func.isRequired,
+  onEditStart: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onChecked: PropTypes.func.isRequired,
+  editComplete: PropTypes.func.isRequired,
+  load: PropTypes.func.isRequired,
+  complete: PropTypes.func.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  editValue: PropTypes.shape({}).isRequired,
+};
 
 const mapDispatchToProps = (dispatch) => ({
   load: (payload) => dispatch({ type: 'LOAD', payload }),

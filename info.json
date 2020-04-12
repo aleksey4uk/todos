@@ -1,19 +1,19 @@
 {
-  "posts": [
+  "users": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "name": "Работа через json-server",
+      "checked": false,
+      "id": 8
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "name": "Добавить ссылку в  .env файлы",
+      "checked": false,
+      "id": 9
+    },
+    {
+      "name": "Настроить Eslint Airbnb",
+      "checked": false,
+      "id": 10
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
