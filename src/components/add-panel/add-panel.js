@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './add-panel.css';
@@ -11,6 +12,7 @@ const AddPanel = (props) => {
   const {
     value, onChanges, onSubmits, data,
   } = props;
+
   return (
     <div className="add-panel">
       <form
@@ -46,6 +48,20 @@ const AddPanel = (props) => {
   );
 };
 
+AddPanel.defaultProps = {
+  value: '',
+  data: [],
+  onChanges: () => {},
+  onSubmits: () => {},
+};
+
+AddPanel.propTypes = {
+  value: PropTypes.string,
+  onChanges: PropTypes.func,
+  onSubmits: PropTypes.func,
+  data: PropTypes.arrayOf(PropTypes.object),
+};
+
 const mapStateToProps = (state) => ({
   ...state,
 });
@@ -64,5 +80,6 @@ const mapDispatchToProps = (dispatch) => ({
       });
   },
 });
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddPanel);

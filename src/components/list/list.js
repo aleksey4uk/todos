@@ -8,32 +8,38 @@ const swapiService = new SwapiService();
 
 class Lists extends Component {
   componentDidMount() {
+    const { load, complete } = this.props;
     swapiService
       .getData()
-      .then(this.props.load)
-      .then(this.props.complete);
+      .then(load)
+      .then(complete);
   }
 
   render() {
-    if (this.props.data.length <= 0) return <h3>Загрузка...</h3>;
     const { data } = this.props;
+    if (data.length <= 0) return <h3>Загрузка...</h3>;
     return (
       <>
         <List>
           {
-            data.map((item, index) => (
-              <ListItems
-                id={item.id}
-                name={item.name}
-                editValue={this.props.editValue}
-                key={index}
-                onEdit={this.props.onEdit}
-                onEditStart={this.props.onEditStart}
-                onDelete={this.props.onDelete}
-                onChecked={this.props.onChecked}
-                editComplete={this.props.editComplete}
-              />
-            ))
+            data.map((item) => {
+              const {
+                editValue, onEdit, onEditStart, onDelete, onChecked, editComplete,
+              } = this.props;
+              return (
+                <ListItems
+                  id={item.id}
+                  name={item.name}
+                  editValue={editValue}
+                  key={item.id}
+                  onEdit={onEdit}
+                  onEditStart={onEditStart}
+                  onDelete={onDelete}
+                  onChecked={onChecked}
+                  editComplete={editComplete}
+                />
+              );
+            })
           }
         </List>
       </>
